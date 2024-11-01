@@ -1,153 +1,270 @@
 'use client'
-import React from "react"
-import { useState } from "react"
-import { Search } from "lucide-react"
+
+import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
-import Link from "next/link"
-import { Grid, Heart, Users, PenTool, PlayCircle, Settings, Menu, LogOut } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { 
+  Inbox, 
+  LayoutGrid, 
+  Heart, 
+  Users, 
+  PenTool, 
+  PlayCircle, 
+  Settings,
+  CreditCard,
+  Youtube,
+  LogOut
+} from 'lucide-react'
+import { cn } from "@/lib/utils"
 
+export default function SettingsPage() {
+  const [autoReward, setAutoReward] = useState(true)
+  const [customerEmails, setCustomerEmails] = useState(true)
+  const [adminEmails, setAdminEmails] = useState(true)
+  const [sslEnabled, setSSLEnabled] = useState(true)
 
-
-export default function Growth() {
-  const [activeTab, setActiveTab] = useState("Social Media")
-
-  const tabs = [
-    "Social Media",
-    "Referral",
-    "Content Creation",
-    "Reviews",
-  ]
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex min-h-screen bg-white overflow-hidden">
       {/* Left Sidebar */}
-      <aside className="w-16 border-r border-gray-200 bg-white flex flex-col items-center py-4 space-y-6">
-            <nav className="space-y-6">
-              <Link href="/menu" className="block">
-                <Menu className="w-6 h-6 text-gray-400" />
+      <aside className="w-64 border-r border-gray-200 bg-white fixed top-0 left-0 h-full overflow-y-auto">
+        <div className="flex items-center gap-2 px-6 py-4 border-b border-gray-200">
+          <Image
+            src="/placeholder.svg"
+            alt="GrowthPanels"
+            width={150}
+            height={30}
+            className="dark:invert"
+          />
+        </div>
+        
+        <nav className="p-4 space-y-8">
+          <div>
+            <p className="text-xs font-medium text-gray-500 mb-4">GROWTHPANEL</p>
+            <div className="space-y-2">
+              <Link href="/inbox" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                <Inbox className="w-5 h-5" />
+                <span>Inbox</span>
               </Link>
-              <Link href="/" className="block">
-                <Grid className="w-6 h-6 text-[#6366F1]" />
+              <Link href="/panel" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                <LayoutGrid className="w-5 h-5" />
+                <span>Your GrowthPanel</span>
               </Link>
-              <Link href="/favorites" className="block">
-                <Heart className="w-6 h-6 text-gray-400" />
-              </Link>
-              <Link href="/users" className="block">
-                <Users className="w-6 h-6 text-gray-400" />
-              </Link>
-              <Link href="/edit" className="block">
-                <PenTool className="w-6 h-6 text-gray-400" />
-              </Link>
-              <Link href="/play" className="block">
-                <PlayCircle className="w-6 h-6 text-gray-400" />
-              </Link>
-              <Link href="/settings" className="block">
-                <Settings className="w-6 h-6 text-gray-400" />
-              </Link>
-            </nav>
-          </aside>
-
-      {/* Main Content */}
-      <main className="flex-1">
-        {/* Header */}
-        <header className="flex items-center justify-between px-8 py-4 border-b border-gray-200">
-          <div className="flex items-center gap-8">
-            <h1 className="text-xl font-semibold">Inbox</h1>
-            <div className="relative">
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-              <Input
-                placeholder="Search here..."
-                className="w-[240px] pl-9 py-2 bg-gray-50 border-gray-200"
-              />
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm">Ramesh</span>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem>
-                  <Settings className="mr-2 h-4 w-4" />
-                  <span>Settings</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Logout</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+
+          <div>
+            <p className="text-xs font-medium text-gray-500 mb-4">YOUR CONTENT</p>
+            <div className="space-y-2">
+              <Link href="/testimonials" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                <Heart className="w-5 h-5" />
+                <span>Video Testimonials</span>
+              </Link>
+              <Link href="/ugc" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                <Users className="w-5 h-5" />
+                <span>UGC</span>
+              </Link>
+              <Link href="/blog" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                <PenTool className="w-5 h-5" />
+                <span>Blog/Case Studies</span>
+              </Link>
+              <Link href="/youtube" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                <Youtube className="w-5 h-5" />
+                <span>YouTube Reviews</span>
+              </Link>
+            </div>
           </div>
-        </header>
 
-         {/* Tabs */}
-         <div className="px-8 pt-4">
-          <nav className="flex gap-8 border-b border-gray-200">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={cn(
-                  "px-1 pb-4 text-sm font-medium relative",
-                  activeTab === tab
-                    ? "text-gray-900 before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-gray-900"
-                    : "text-gray-500 hover:text-gray-700"
-                )}
-              >
-                {tab}
-              </button>
-            ))}
-          </nav>
-        </div>
+          <div>
+            <p className="text-xs font-medium text-gray-500 mb-4">ACCOUNT MANAGEMENT</p>
+            <div className="space-y-2">
+              <Link href="/billing" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                <CreditCard className="w-5 h-5" />
+                <span>Billing</span>
+              </Link>
+              <Link href="/settings" className="flex items-center gap-2 bg-gray-100 text-gray-900 px-2 py-1.5 rounded-lg">
+                <Settings className="w-5 h-5" />
+                <span>Settings</span>
+              </Link>
+            </div>
+          </div>
+        </nav>
+      </aside>
 
-        {/* Table */}
-        <div className="px-8 py-6">
-          <table className="w-full">
-            <thead>
-              <tr className="text-left text-sm text-gray-500">
-                <th className="pb-4 font-medium">Type</th>
-                <th className="pb-4 font-medium">Customer</th>
-                <th className="pb-4 font-medium">Submission</th>
-                <th className="pb-4 font-medium">Reward</th>
-                <th className="pb-4 font-medium">
-                  <div className="flex items-center gap-1">
-                    Date
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                      <path d="M7 13L12 18L17 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto ml-64">
+        <div className="max-w-4xl mx-auto py-8 px-4">
+          <h1 className="text-2xl font-semibold mb-8">Settings</h1>
+
+          <div className="space-y-12">
+            {/* Basic Information */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium mb-1">Name</h3>
+                <p className="text-sm text-gray-500 mb-2">Your name is used to identify you on the site.</p>
+                <Input placeholder="Name" className="max-w-md" />
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-1">Email</h3>
+                <p className="text-sm text-gray-500 mb-2">Your email address is used to log in and send you notifications.</p>
+                <Input placeholder="Email" className="max-w-md" />
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-1">Company Name</h3>
+                <p className="text-sm text-gray-500 mb-2">Your company name is used to identify your business on the site and on your GrowthPanel.</p>
+                <Input placeholder="Company Name" className="max-w-md" />
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-1">Domain</h3>
+                <p className="text-sm text-gray-500 mb-2">The domain you are going to embed the GrowthPanel on.</p>
+                <Input placeholder="Domain" className="max-w-md" />
+              </div>
+            </div>
+
+            {/* Logo Settings */}
+            <div>
+              <h3 className="text-lg font-medium mb-1">Logo image</h3>
+              <p className="text-sm text-gray-500 mb-4">The logo you want to use in emails sent to your customers from GrowthPanels.</p>
+              <div className="mb-4">
+                <Image
+                  src="/placeholder.svg"
+                  alt="GrowthPanels Logo"
+                  width={200}
+                  height={40}
+                  className="border rounded-lg p-4"
+                />
+              </div>
+              <div className="flex gap-4">
+                <Button className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white">Upload custom image</Button>
+                <Button variant="outline" className="text-[#7C3AED] border-[#7C3AED] hover:bg-[#7C3AED] hover:text-white">Set to GrowthPanels Logo</Button>
+              </div>
+            </div>
+
+            {/* Technical Settings */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium mb-1">SSL Support</h3>
+                <div className="flex items-center justify-between max-w-md">
+                  <div>
+                    <p className="text-sm text-gray-500">Whether or not your site uses SSL (https:// or a padlock in the browser).</p>
                   </div>
-                </th>
-                <th className="pb-4 font-medium">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colSpan={6} className="text-center py-8 text-gray-500">
-                  No results found
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <Switch
+                    checked={sslEnabled}
+                    onCheckedChange={setSSLEnabled}
+                    className="relative inline-flex h-6 w-10 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 data-[state=checked]:bg-[#7C3AED]"
+                  >
+                    <span className="sr-only">Toggle</span>
+                    <span className={`${sslEnabled ? "translate-x-6" : "translate-x-1"} inline-block h-4 w-4 rounded-full bg-white transition-transform`} />
+                  </Switch>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-1">Currency</h3>
+                <p className="text-sm text-gray-500 mb-2">The currency you wish to use for your account.</p>
+                <Select defaultValue="usd">
+                  <SelectTrigger className="max-w-md">
+                    <SelectValue placeholder="Select currency" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="usd">$ (USD)</SelectItem>
+                    <SelectItem value="eur">€ (EUR)</SelectItem>
+                    <SelectItem value="gbp">£ (GBP)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Integration Settings */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium mb-1">Stripe</h3>
+                <p className="text-sm text-gray-500 mb-4">Connect your Stripe account to credit customers for completing tasks and to track sales</p>
+                <Button className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white">Connect to Stripe</Button>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-1">AutoReward</h3>
+                <p className="text-sm text-gray-500 mb-2">AutoReward allows you to automatically pay for tasks completed by customers that GrowthPanels can verify on your behalf.</p>
+                <div className="flex items-center justify-between max-w-md">
+                  <p className="text-sm">
+                    AutoReward is {' '}
+                    <span className="font-medium">{autoReward ? 'Enabled' : 'Disabled'}</span>
+                  </p>
+                  <Switch
+                    checked={autoReward}
+                    onCheckedChange={setAutoReward}
+                    className="relative inline-flex h-6 w-10 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 data-[state=checked]:bg-[#7C3AED]"
+                  >
+                    <span className="sr-only">Toggle AutoReward</span>
+                    <span className={`${autoReward ? "translate-x-6" : "translate-x-1"} inline-block h-4 w-4 rounded-full bg-white transition-transform`} />
+                  </Switch>
+                </div>
+              </div>
+            </div>
+
+            {/* Notification Settings */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium mb-1">Send emails to Customers on key events</h3>
+                <p className="text-sm text-gray-500 mb-2">GrowthPanels can let your customers know when they have been rewarded for completing a task, when their tasks have been rejected and more.</p>
+                <div className="flex items-center justify-between max-w-md">
+                  <p className="text-sm ">
+                    Send emails to Customers on key events is {' '}
+                    <span className="font-medium">{customerEmails ? 'Enabled' : 'Disabled'}</span>
+                  </p>
+                  <Switch
+                    checked={customerEmails}
+                    onCheckedChange={setCustomerEmails}
+                    className="relative inline-flex h-6 w-10 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 data-[state=checked]:bg-[#7C3AED]"
+                  >
+                    <span className="sr-only">Toggle customer emails</span>
+                    <span className={`${customerEmails ? "translate-x-6" : "translate-x-1"} inline-block h-4 w-4 rounded-full bg-white transition-transform`} />
+                  </Switch>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium mb-1">Send emails to you on key events</h3>
+                <p className="text-sm text-gray-500 mb-2">GrowthPanels can let you know when a customer has completed a task, when a sale has been completed and more.</p>
+                <div className="flex items-center justify-between max-w-md">
+                <p className="text-sm ">
+                Send emails to you on key events is{' '}
+                <span className="font-medium">{adminEmails ? 'Enabled' : 'Disabled'}</span>
+                </p>
+
+                  <Switch
+                    checked={adminEmails}
+                    onCheckedChange={setAdminEmails}
+                    className="relative inline-flex h-6 w-10 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 data-[state=checked]:bg-[#7C3AED]"
+                  >
+                    <span className="sr-only">Toggle admin emails</span>
+                    <span className={`${adminEmails ? "translate-x-6" : "translate-x-1"} inline-block h-4 w-4 rounded-full bg-white transition-transform`} />
+                  </Switch>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-4">
+              <Button className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white">Save changes</Button>
+              <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50">Delete account</Button>
+            </div>
+          </div>
         </div>
       </main>
-
-      {/* Chat Widget */}
-      <div className="fixed bottom-6 right-6 w-12 h-12 bg-black rounded-full flex items-center justify-center cursor-pointer">
-        <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
-          <path d="M8 12H8.01M12 12H12.01M16 12H16.01M21 12C21 16.418 16.97 20 12 20C10.5 20 9.077 19.692 7.8 19.14L3 20L4.3 15.9C3.486 14.664 3 13.246 3 12C3 7.582 7.03 4 12 4C16.97 4 21 7.582 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </div>
     </div>
   )
 }
